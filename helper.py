@@ -45,9 +45,13 @@ Screen:
                 
                 MDRectangleFlatButton:
                     text: 'Quit'
-                    font_style: 'Caption'
+                    font_style: 'H6'
                     on_release: app.stop()
                     size_hint: (1,0.1)
+                    markup: True
+                    
+                    
+                    
                     
                 
                 
