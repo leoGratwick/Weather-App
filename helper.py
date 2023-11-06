@@ -11,7 +11,7 @@ Screen:
                         id: headerBar
                         title: 'Bristol'
                         left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
-                        elevation: 4
+                        elevation: 3
                         
                     
                         

@@ -86,45 +86,45 @@ class Props(Enum):
 class DaysScreen(Screen):
 
     def add_data(self, data):
+
+        # initialise sections
         self.leftSection = MDBoxLayout(orientation='vertical', size_hint=(0.6, 1))
         self.rightSection = MDBoxLayout(orientation='horizontal', spacing=10, padding= 10)
-        # today
+
+        # today section
         self.leftSection.add_widget(MDLabel(text='Today', halign='center', font_style="H3", size_hint_y=0.5))
 
-        print(overallImg[data["TODAY"][MainProps.OVERALL.value]])
+        # atempt to find photo for weather conditions
         if data["TODAY"][MainProps.OVERALL.value] in overallImg:
             self.leftSection.add_widget(
                 Image(source=overallImg[data["TODAY"][MainProps.OVERALL.value]], fit_mode='contain'))
         else:
             self.leftSection.add_widget(Image(source=overallImg["No Icon"]))
 
-        # self.leftSection.add_widget(MDLabel(text=data["TODAY"][MainProps.OVERALL.value], halign='center', size_hint_y = None))
+        # current temprature in location
         self.leftSection.add_widget(MDLabel(
             text=data["TODAY"][MainProps.DETAILS.value][data["TODAY"][MainProps.DETAILS.value].columns[0]][
                 Props.TEMP.value],
             halign='center', valign='top', font_style="H3", size_hint_y=0.6))
-        tempContainer = MDBoxLayout(
-            MDLabel(text=data["TODAY"][MainProps.MAXTEMP.value], halign='right', font_style="H3", valign='center'),
-            MDLabel(text=data["TODAY"][MainProps.MINTEMP.value], halign='left', valign='center'),
-            size_hint_x=0.5,
-            size_hint_y=None,
-            pos_hint={'center_x': 0.5, 'center_y': 0.5},
-            spacing=5
-        )
 
-        # self.leftSection.add_widget(tempContainer)
+
+
 
         # other days
         num_days = len(data.columns) - 1
         for i in range(num_days):
             container = MDBoxLayout(orientation='vertical', padding=3)
             container.add_widget(MDLabel(text=data[f"DAY{i + 1}"][MainProps.NAME.value], halign='center'))
+
+            # finds image for weather contidions
             if data["TODAY"][MainProps.OVERALL.value] in overallImg:
                 container.add_widget(Image(source=overallImg[data[f"DAY{i + 1}"][MainProps.OVERALL.value]]))
             else:
                 container.add_widget(Image(source=overallImg["No Icon"]))
 
             container.add_widget(MDLabel(text=data[f"DAY{i + 1}"][MainProps.OVERALL.value], halign='center'))
+
+            # max and min temratures
             tempContainer2 = MDBoxLayout(
                 MDLabel(text=data[f"DAY{i + 1}"][MainProps.MAXTEMP.value], halign='right', font_style="H5"),
                 MDLabel(text=data[f"DAY{i + 1}"][MainProps.MINTEMP.value], halign='left'),
@@ -133,6 +133,7 @@ class DaysScreen(Screen):
                 spacing=10
                 )
 
+            # Add section to right section
             container.add_widget(tempContainer2)
             card = MDCard(size_hint_y=0.95,
                           pos_hint={'center_x': 0.5, 'center_y': 0.5},
@@ -141,6 +142,7 @@ class DaysScreen(Screen):
             card.add_widget(container)
             self.rightSection.add_widget(card)
 
+        # puts both left and right screens together and then adds to the screen
         self.mainLayout = MDBoxLayout(self.leftSection, self.rightSection, orientation='horizontal')
         self.add_widget(self.mainLayout)
 
@@ -168,6 +170,7 @@ class MyApp(MDApp):
         return Builder.load_string(helper.helper)
 
     def on_start(self):
+        #  adds all locations to nav drawer
         for city in locations:
             listItem = OneLineListItem(
                 text=city,
@@ -175,27 +178,34 @@ class MyApp(MDApp):
             )
             self.root.ids.locationNav.add_widget(listItem)
 
+        # creates day screen
         self.createDayScreen()
 
     def changeLocation(self, city):
+
+        # changes location, scrapes new location
         self.changeTitle(city)
         self.data = scraper.scrape(self.location)
+
+        # deleted old day sceen and add new one
         self.root.ids.body.remove_widget(self.root.ids.body.children[0])
         self.createDayScreen()
 
     def changeTitle(self, city):
+        # changes navbar title
         self.root.ids.headerBar.title = city
         self.location = city
         self.root.ids.nav_drawer.set_state("closed")
 
     def createDayScreen(self):
+
+        # create screen
         screen = DaysScreen(name='dayScreen')
+        # add data to screen
         screen.add_data(self.data)
-        print(screen)
-        # self.root.ids.body.add_widget(MDLabel(text='bello'))
-        # self.root.ids.body.add_widget(MDLabel(text='bello2'))
+        # add screen to the body of app
         self.root.ids.body.add_widget(screen)
-        print("added day screen")
+
 
 
 if __name__ == '__main__':
