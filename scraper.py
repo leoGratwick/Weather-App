@@ -9,7 +9,8 @@ locationDictionary = {
     "Singapore": "https://www.metoffice.gov.uk/weather/forecast/w21z6ymzr#?",
     "Los Angeles": "https://www.metoffice.gov.uk/weather/forecast/9q5cu2rju#?",
     "New York": "https://www.metoffice.gov.uk/weather/forecast/dr5reg58f#?",
-    "Glasgow": "https://www.metoffice.gov.uk/weather/forecast/gcuvz3bch#?"
+    "Glasgow": "https://www.metoffice.gov.uk/weather/forecast/gcuvz3bch#?",
+
 }
 
 def scrape(location):
