@@ -3,7 +3,11 @@
 Scrapes weather data from 6 different locations around the world and displays it in a python kivy app
 
 
-Using:
+### Features:
+- changing location in the Nav drawer 
+- changing your default location
+
+### Created Using:
 - Kivy
 - KivyMD
 - pandas
