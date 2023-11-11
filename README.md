@@ -16,8 +16,8 @@ Scrapes weather data from 6 different locations around the world and displays it
 
 
 
-![Birstol_Weather](https://raw.githubusercontent.com/leoGratwick/Weather-App/master/Display_Images/img.png)
-![Nav_Bar](https://raw.githubusercontent.com/leoGratwick/Weather-App/master/Display_Images/img_1.png)
-![Singapore_Weather](https://raw.githubusercontent.com/leoGratwick/Weather-App/master/Display_Images/img_2.png)
+![Birstol_Weather](https://raw.githubusercontent.com/leoGratwick/Weather-App/master/Display_Images/img_3.png)
+![Nav_Bar](https://raw.githubusercontent.com/leoGratwick/Weather-App/master/Display_Images/img_4.png)
+![Singapore_Weather](https://raw.githubusercontent.com/leoGratwick/Weather-App/master/Display_Images/img_5.png)
 
 
